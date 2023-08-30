@@ -5,14 +5,23 @@ const rl = readline.createInterface({ input, output });
 
 function askGuess() {
     rl.question('Enter a Guess ', (num) => {
-        checkGuess(num);
-        // console.log()
-        rl.close();
+        if (checkGuess(num) === false){
+            askGuess();
+        }
+        else {
+            rl.close();
+        }
+
 
 })
     }
+    const randomInRange= (min, max) => {
+        min= Math.ceil(min);
+        max=Math.floor(max);
+        return Math.floor(Math.random()*(max-min + 1) + min);
+    }
 
-let secretNumber = 10
+let secretNumber = randomInRange(1,100);
 
 function checkGuess(num) {
 
@@ -29,5 +38,7 @@ function checkGuess(num) {
         return true;
     }
 }
+
+
 
 askGuess()
